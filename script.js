@@ -6,12 +6,37 @@ var products = [
   {name: "Old Ford Car Model", price: "46", image: "https://s3.amazonaws.com/mernbook/marketplace/Ford.jpg"},
   {name: "Storm Trooper Figurine", price: "23", image: "https://s3.amazonaws.com/mernbook/marketplace/stormtrooper-1995015_960_720.jpg"}
 ];
-var cart = {
-  items: [],
-  total: 0
-};
+var cart = localStorage.getItem('cart') 
+  ? JSON.parse(localStorage.getItem('cart')) :
+  {
+    items: [],
+    total: 0
+  };
+
+localStorage.setItem('cart', JSON.stringify(cart)); //need to stringify or else shows as object,object; not the actual names/values
 
 $(document).ready(function(){
+  products.forEach(function(product,index){
+    var colDiv = $('div').attr('class','col-md');
+    var cardDiv = $('div').addClass('card');//addClass and attr(Attribute) do the same thing
+    $('#products-row').append(colDiv);
+  });
+  
+  
+  $("#itemNo").text(cart.items.length);
+  
+  $("#showCartBtn").click(function(){
+    $("#cart").show();
+    $("#products").hide();
+    $("#showCartBtn").hide();
+  });
+  
+  $("#close").click(function(){
+    $("#cart").hide();
+    $("#products").show();
+    $("#showCartBtn").show();
+  });
+  
   console.log("Start here");
   // Basic tasks
   // 1. Show / hide cart section on button click (Cart button / close cutton)

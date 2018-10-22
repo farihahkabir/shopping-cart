@@ -10,30 +10,20 @@
 <body>
   <div class="container">
     <h1 class="display-4">Online Marketplace</h1>
-    <h3>Your shopping cart has <span id="itemNo">0</span> items. <button id="showCartBtn" class="btn btn-success">Cart</button></h3>
+    <h3>Your shopping cart has <span id="itemNo"></span> items. <button id="showCartBtn" class="btn btn-success">Cart</button></h3>
     <hr class="my-4">
 <!-- Products section -->
     <div id="products" class="jumbotron">
       <h2>Products</h2>
       <hr class="my-4">
-      <div class="row">
-        <!-- Sample product card -->
-        <div class="col-md-4">
-          <div class="card">
-            <img class="card-img-top" src="https://s3.amazonaws.com/mernbook/marketplace/tardis.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Tardis Figurine</h5>
-              <p class="card-text">$ 14</p>
-              <button class="btn btn-primary">Add to Cart</button>
-            </div>
-          </div>
-        </div>
+      <div id="products-row" class="row">
+        
       </div>
     </div>
 <!-- Cart section -->
     <div id="cart" class="jumbotron">
       <h2>Cart</h2>
-      <button class="btn btn-dark btn-sm">Close</button>
+      <button id="close" class="btn btn-dark btn-sm">Close</button>
       <hr class="my-4">
       <div class="row">
         <!-- Sample cart item -->
