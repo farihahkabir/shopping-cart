@@ -16,7 +16,7 @@ var cart = localStorage.getItem('cart')
 localStorage.setItem('cart', JSON.stringify(cart)); //need to stringify or else shows as object,object; not the actual names/values
 
 $(document).ready(function(){
-  products.forEach(function(product,index){
+  products.forEach(function(product,index){ //products page
     var colDiv = $('<div>').addClass('col-md-4');
     $('#products-row').append(colDiv);
     
@@ -48,8 +48,25 @@ $(document).ready(function(){
     cardBody.append(addToCartButton);
   });
   
-  
   $("#itemNo").text(cart.items.length);
+  
+  cart.items.forEach(function(item, index){
+    var colDiv = $('<div>').addClass('col-md-4');
+    $('#cart-row').append(colDiv);
+    
+    var cardDiv = $('<div>').addClass('card');//addClass and attr(Attribute) do the same thing
+    colDiv.append(cardDiv);
+    
+    var productImage = $('<img>').addClass("card-img-top");
+    cardDiv.append(productImage);
+    productImage.attr('src', item.image);
+    
+    var cardBody = $('<div>').addClass('card-body');
+    cardDiv.append(cardBody);
+    
+    var productTitle = $('<h5>').addClass('card-title').text(item.name);
+    cardBody.append(productTitle);
+  });
   
   $("#showCartBtn").click(function(){
     $("#cart").show();
