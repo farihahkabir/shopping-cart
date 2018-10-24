@@ -17,9 +17,35 @@ localStorage.setItem('cart', JSON.stringify(cart)); //need to stringify or else 
 
 $(document).ready(function(){
   products.forEach(function(product,index){
-    var colDiv = $('div').attr('class','col-md');
-    var cardDiv = $('div').addClass('card');//addClass and attr(Attribute) do the same thing
+    var colDiv = $('<div>').addClass('col-md-4');
     $('#products-row').append(colDiv);
+    
+    var cardDiv = $('<div>').addClass('card');//addClass and attr(Attribute) do the same thing
+    colDiv.append(cardDiv);
+    
+    var productImage = $('<img>').addClass("card-img-top");
+    cardDiv.append(productImage);
+    productImage.attr('src', product.image);
+    
+    var cardBody = $('<div>').addClass('card-body');
+    cardDiv.append(cardBody);
+    
+    var productTitle = $('<h5>').addClass('card-title').text(product.name);
+    cardBody.append(productTitle);
+    
+    var productPrice = $('<p>').addClass('card-text').text("$" + product.price);
+    cardBody.append(productPrice);
+    
+    var addToCartButton = $('<button>').addClass('btn btn-primary').text('Add to Cart').attr('id',index);
+    addToCartButton.click(function(event){
+      console.log(event.target.id);
+      var cartItem = products[event.target.id];
+      cartItem.quantity = 1;
+      cart.items.push(cartItem);
+      $("#itemNo").text(cart.items.length);
+      localStorage.setItem('cart', JSON.stringify(cart)); //when add to cart button is clicked, saved to local storage, so when you refresh the data is still there
+    });
+    cardBody.append(addToCartButton);
   });
   
   
