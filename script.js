@@ -40,7 +40,7 @@ $(document).ready(function(){
       var cartItem = products[event.target.id];
       cartItem.quantity = 1;
       cart.items.push(cartItem);
-      cart.total = cart.items.length * cartItem.price;
+      cart.total = (parseInt(cart.total) + parseInt(cartItem.price)).toString();
       $("#itemNo").text(cart.items.length);
       $("#total").text(cart.total);
       localStorage.setItem('cart', JSON.stringify(cart)); //when add to cart button is clicked, saved to local storage, so when you refresh the data is still there
@@ -72,26 +72,8 @@ $(document).ready(function(){
     var productPrice = $('<p>').addClass('card-text').text("$"+item.price + " x ");
     cardBody.append(productPrice);
     
-    var noOfProduct = $('<input type=number id=numOfProduct value=1 min=0>').bind('keyup mouseup', function(){
-      item.quantity = $('#numOfProduct').val();
-      //localStorage.setItem('cart', JSON.stringify(cart));
-    });
+    var noOfProduct = $('<input type=number id=numOfProduct value=1 readonly>');
     productPrice.append(noOfProduct);
-    
-    var addNewProduct =  $('<button>').addClass('btn btn-primary').text('Add').attr('id',index);
-    addNewProduct.click(function(event){
-      for (var i=0; i<item.quantity; i++){
-        var cartItem = products[event.target.id];
-        cart.items.push(cartItem); 
-      }
-      
-      cart.total = cart.total + (item.price * item.quantity);
-      
-      $('#itemNo').text(cart.items.length);
-      $('#total').text(cart.total);
-      localStorage.setItem('cart', JSON.stringify(cart));
-    });
-    cardBody.append(addNewProduct);
     
     colDiv.append(cardDiv);
     $('#cart-row').append(colDiv);
@@ -109,13 +91,4 @@ $(document).ready(function(){
     $("#showCartBtn").show();
   });
   
-  console.log("Start here");
-  // Basic tasks
-  // 1. Show / hide cart section on button click (Cart button / close cutton)
-  // 2. Dynamically load products to view
-  // 3. Dynamically show total items in Cart
-  // 4. Add to cart button functionality
-  // 5. Dynamically load cart items
-  // 6. Implement quantity update for each cart item and update total cost dynamically.
-  // 7. Store and load cart from localStorage
 });
